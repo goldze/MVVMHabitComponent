@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="textColor">#333333</color>
+    <color name="textColorVice">#6C6C6C</color>
+    <color name="textColorRed">#D51717</color>
+    <color name="textColorHint">#999999</color>
+    <color name="appColor">#FF2041</color>
+    <color name="appBackColor">#F4F3F3</color>
+    <color name="viewLineColor">#F0F0F0</color>
+
+    <color name="homePersonColor">#9983F4</color>
+    <color name="homeJzwColor">#32B9B1</color>
+    <color name="homeCzrkColor">#66C8B5</color>
+    <color name="homeLdrkColor">#E4B258</color>
+    <color name="homeNanColor">#516ED1</color>
+    <color name="homeNvColor">#EF3E77</color>
+    <color name="homeRkblColor">#7DC3FE</color>
+
+    <color name="XMSFColor">#EE8E5C</color>
+    <color name="SDRYColor">#885BE0</color>
+    <color name="SFRYColor">#59B665</color>
+    <color name="JSBRColor">#64CEDC</color>
+    <color name="WHGJColor">#5F59C9</color>
+    <color name="CYXJColor">#6396E4</color>
+    <color name="FZQKColor">#F5DB71</color>
+    <color name="FZQXColor">#DB5555</color>
+</resources>
