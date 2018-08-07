@@ -26,8 +26,8 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:' + rootProject.ext.version["support-version"]
-    testImplementation 'junit:junit:4.12'
+    implementation rootProject.ext.support["appcompat-v7"]
+    testImplementation rootProject.ext.support["junit"]
     //宿主项目中判断组件是否需要独立运行
     if (isBuildModule.toBoolean()) {
         //组件独立运行时，宿主项目直接依赖基础库，避免编译错误

@@ -1,6 +1,7 @@
 package com.goldze.base.config;
 
 import android.app.Application;
+import android.databinding.adapters.ViewBindingAdapter;
 
 import com.goldze.base.base.IModuleInit;
 
