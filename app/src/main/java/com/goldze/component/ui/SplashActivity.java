@@ -23,7 +23,7 @@ public class SplashActivity extends Activity {
             public void run() {
                 inSign();
             }
-        }, 2 * 1000);
+        }, 3 * 1000);
     }
 
     /**
