@@ -18,8 +18,7 @@ import me.goldze.mvvmhabit.bus.RxSubscriptions;
  */
 
 public class TabBar1ViewModel extends BaseViewModel {
-    public ObservableField<String> textObservable = new ObservableField("TAB!");
-
+    public ObservableField<String> textObservable = new ObservableField("TAB");
     public TabBar1ViewModel(Context context) {
         super(context);
     }
