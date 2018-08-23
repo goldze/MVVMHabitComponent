@@ -30,7 +30,9 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    //公用的support相关库在base中依赖
+    api rootProject.ext.support["design"]
     //核心基础库(由于这是例子, 所以这里采用远程依赖的方式, 可根据实际情况自行换成源码依赖，源码地址：https://github.com/goldze/MVVMHabit)
     api rootProject.ext.dependencies.MVVMHabit
     //阿里路由框架

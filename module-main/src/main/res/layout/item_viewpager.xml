@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="com.goldze.main.ui.viewmodel.ViewPagerItemViewModel" />
+
+        <variable
+            name="viewModel"
+            type="ViewPagerItemViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:binding="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?android:selectableItemBackground"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            binding:onClickCommand="@{viewModel.onClick}"
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:text="@{viewModel.text}" />
+    </LinearLayout>
+</layout>

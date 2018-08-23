@@ -5,13 +5,11 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-
 import com.goldze.main.BR;
 import com.goldze.main.R;
 import com.goldze.main.ui.viewmodel.TabBar1ViewModel;
 
 import me.goldze.mvvmhabit.base.BaseFragment;
-import me.goldze.mvvmhabit.base.BaseViewModel;
 
 /**
  * Created by goldze on 2018/6/21
