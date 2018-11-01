@@ -25,6 +25,7 @@ public class TabBar2ViewModel extends BaseViewModel {
     public TabBar2ViewModel(@NonNull Application application) {
         super(application);
     }
+
     public void addPage() {
         items.clear();
         //模拟3个ViewPager页面
