@@ -38,10 +38,8 @@ public class UserActivity extends BaseActivity<ActivityUserBinding, UserViewMode
     }
 
     @Override
-    public UserViewModel initViewModel() {
-        //View持有ViewModel的引用 (这里暂时没有用Dagger2解耦)
-        return new UserViewModel(this, name);
+    public void initData() {
+        viewModel.setName(name);
     }
-
 }
 

@@ -26,8 +26,4 @@ public class TabBar3Fragment extends BaseFragment {
         return BR.viewModel;
     }
 
-    @Override
-    public BaseViewModel initViewModel() {
-        return new BaseViewModel();
-    }
 }

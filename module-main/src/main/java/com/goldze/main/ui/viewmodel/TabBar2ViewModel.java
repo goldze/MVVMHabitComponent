@@ -1,8 +1,10 @@
 package com.goldze.main.ui.viewmodel;
 
+import android.app.Application;
 import android.content.Context;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
+import android.support.annotation.NonNull;
 
 import com.goldze.main.BR;
 import com.goldze.main.R;
@@ -20,14 +22,15 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding;
  */
 
 public class TabBar2ViewModel extends BaseViewModel {
-    public TabBar2ViewModel(Context context) {
-        super(context);
+    public TabBar2ViewModel(@NonNull Application application) {
+        super(application);
     }
-    @Override
-    public void onCreate() {
+    public void addPage() {
+        items.clear();
         //模拟3个ViewPager页面
         for (int i = 1; i <= 3; i++) {
-            items.add(new ViewPagerItemViewModel(context, "第" + i + "个页面"));
+            ViewPagerItemViewModel itemViewModel = new ViewPagerItemViewModel(this, "第" + i + "个页面");
+            items.add(itemViewModel);
         }
     }
 

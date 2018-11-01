@@ -29,12 +29,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     }
 
     @Override
-    public LoginViewModel initViewModel() {
-        //View持有ViewModel的引用 (这里暂时没有用Dagger2解耦)
-        return new LoginViewModel(this);
-    }
-
-    @Override
     public void initViewObservable() {
         //监听ViewModel中pSwitchObservable的变化, 当ViewModel中执行【uc.pSwitchObservable.set(!uc.pSwitchObservable.get());】时会回调该方法
         viewModel.uc.pSwitchObservable.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {

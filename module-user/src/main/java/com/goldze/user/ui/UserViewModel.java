@@ -1,8 +1,10 @@
 package com.goldze.user.ui;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.databinding.ObservableField;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -19,8 +21,11 @@ import me.goldze.mvvmhabit.bus.RxBus;
 public class UserViewModel extends BaseViewModel {
     public ObservableField<String> nameObservable = new ObservableField();
 
-    public UserViewModel(Context context, String name) {
-        super(context);
+    public UserViewModel(@NonNull Application application) {
+        super(application);
+    }
+
+    public void setName(String name) {
         nameObservable.set(name);
     }
 
@@ -32,7 +37,7 @@ public class UserViewModel extends BaseViewModel {
                 //RxBus解耦组件通信
                 RxBus.getDefault().post(nameObservable.get());
             }
-            ((Activity) context).finish();
+            finish();
         }
     });
 }

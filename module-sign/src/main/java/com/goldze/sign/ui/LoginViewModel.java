@@ -1,11 +1,13 @@
 package com.goldze.sign.ui;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -36,8 +38,8 @@ public class LoginViewModel extends BaseViewModel {
         public ObservableBoolean pSwitchObservable = new ObservableBoolean(false);
     }
 
-    public LoginViewModel(Context context) {
-        super(context);
+    public LoginViewModel(@NonNull Application application) {
+        super(application);
     }
 
     //清除用户名的点击事件, 逻辑从View层转换到ViewModel层
@@ -94,7 +96,7 @@ public class LoginViewModel extends BaseViewModel {
                 //使用路由框架，进入主模块页面
                 ARouter.getInstance().build("/app/Main").navigation();
                 //关闭页面
-                ((Activity) context).finish();
+                finish();
             }
         }, 3 * 1000);
     }

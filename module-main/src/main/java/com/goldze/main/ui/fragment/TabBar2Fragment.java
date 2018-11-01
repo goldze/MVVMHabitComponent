@@ -30,14 +30,14 @@ public class TabBar2Fragment extends BaseFragment<FragmentTab2Binding, TabBar2Vi
     }
 
     @Override
-    public TabBar2ViewModel initViewModel() {
-        return new TabBar2ViewModel(getContext());
-    }
-
-    @Override
     public void initData() {
         // 使用 TabLayout 和 ViewPager 相关联
         binding.tabs.setupWithViewPager(binding.viewPager);
         binding.viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(binding.tabs));
+    }
+
+    @Override
+    public void initViewObservable() {
+        viewModel.addPage();
     }
 }
