@@ -9,7 +9,6 @@ import com.goldze.main.BR;
 import com.goldze.main.R;
 
 import me.goldze.mvvmhabit.base.BaseFragment;
-import me.goldze.mvvmhabit.base.BaseViewModel;
 
 /**
  * Created by goldze on 2018/6/21

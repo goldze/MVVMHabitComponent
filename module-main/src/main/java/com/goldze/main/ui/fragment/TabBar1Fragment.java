@@ -11,7 +11,6 @@ import com.goldze.main.databinding.FragmentTab1Binding;
 import com.goldze.main.ui.viewmodel.TabBar1ViewModel;
 
 import me.goldze.mvvmhabit.base.BaseFragment;
-import me.goldze.mvvmhabit.base.BaseViewModel;
 
 /**
  * Created by goldze on 2018/6/21

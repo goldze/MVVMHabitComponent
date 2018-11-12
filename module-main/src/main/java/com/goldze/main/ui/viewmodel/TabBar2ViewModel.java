@@ -1,7 +1,6 @@
 package com.goldze.main.ui.viewmodel;
 
 import android.app.Application;
-import android.content.Context;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
 import android.support.annotation.NonNull;
