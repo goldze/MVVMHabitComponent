@@ -1,0 +1,43 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            if (isBuildModule.toBoolean()) {
+            } else {
+                resources {
+                    //正式版本时，排除debug文件夹下所有调试文件
+                    exclude 'src/debug/*'
+                }
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    //公用的support相关库在base中依赖
+    api rootProject.ext.support["design"]
+    api rootProject.ext.support["appcompat-v7"]
+    //公用资源在base中依赖
+    api project(':library-res')
+    //核心基础库(由于这是例子, 所以这里采用远程依赖的方式, 可根据实际情况自行换成源码依赖，源码地址：https://github.com/goldze/MVVMHabit)
+    api rootProject.ext.dependencies.MVVMHabit
+    //阿里路由框架
+    api rootProject.ext.dependencies["arouter-api"]
+}

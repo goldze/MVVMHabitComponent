@@ -1,22 +1,28 @@
 package com.goldze.sign.ui;
 
-import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.alibaba.android.arouter.launcher.ARouter;
+import com.goldze.base.contract._Login;
+import com.goldze.base.global.SPKeyGlobal;
 
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.binding.command.BindingAction;
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
 import me.goldze.mvvmhabit.binding.command.BindingConsumer;
+import me.goldze.mvvmhabit.bus.RxBus;
+import me.goldze.mvvmhabit.utils.RxUtils;
+import me.goldze.mvvmhabit.utils.SPUtils;
 import me.goldze.mvvmhabit.utils.ToastUtils;
 
 /**
@@ -88,16 +94,30 @@ public class LoginViewModel extends BaseViewModel {
             ToastUtils.showShort("请输入密码！");
             return;
         }
-        showDialog();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                dismissDialog();
-                //使用路由框架，进入主模块页面
-                ARouter.getInstance().build("/app/Main").navigation();
-                //关闭页面
-                finish();
-            }
-        }, 3 * 1000);
+
+        //RaJava模拟一个延迟操作
+        Observable.just("")
+                .delay(3, TimeUnit.SECONDS) //延迟3秒
+                .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))//界面关闭自动取消
+                .compose(RxUtils.schedulersTransformer()) //线程调度
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        showDialog();
+                    }
+                })
+                .subscribe(new Consumer() {
+                    @Override
+                    public void accept(Object o) throws Exception {
+                        dismissDialog();
+                        //保存用户信息
+                        SPUtils.getInstance().put(SPKeyGlobal.USER_INFO, userName.get());
+                        _Login _login = new _Login();
+                        //采用ARouter+RxBus实现组件间通信
+                        RxBus.getDefault().post(_login);
+                        //关闭页面
+                        finish();
+                    }
+                });
     }
 }

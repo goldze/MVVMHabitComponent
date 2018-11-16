@@ -1,11 +1,13 @@
 package com.goldze.component.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.goldze.base.router.RouterActivityPath;
 
 import me.goldze.mvvmhabit.utils.ToastUtils;
 
@@ -30,8 +32,7 @@ public class SplashActivity extends Activity {
      * 跳转登录界面
      */
     private void inSign() {
-        //使用路由框架，跳转到Sign组件的登录页
-        ARouter.getInstance().build("/sign/Login").navigation();
+        startActivity(new Intent(this, MainActivity.class));
         finish();
     }
 }

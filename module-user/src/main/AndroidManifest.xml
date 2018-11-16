@@ -2,6 +2,6 @@
     package="com.goldze.user">
 
     <application>
-        <activity android:name=".ui.UserActivity"></activity>
+        <activity android:name=".ui.activity.UserDetailActivity"></activity>
     </application>
 </manifest>

@@ -10,6 +10,12 @@ android {
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //阿里路由框架配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
     buildTypes {
         release {
@@ -26,18 +32,25 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation rootProject.ext.support["appcompat-v7"]
-    testImplementation rootProject.ext.support["junit"]
     //宿主项目中判断组件是否需要独立运行
     if (isBuildModule.toBoolean()) {
         //组件独立运行时，宿主项目直接依赖基础库，避免编译错误
-        implementation project(':base')
+        implementation project(':library-base')
     } else {
-        //登录验证模块
+        //身份验证模块
         implementation project(':module-sign')
-        //主业务模块
-        implementation project(':module-main')
+        //应用模块
+        implementation project(':module-home')
+        //工作模块
+        implementation project(':module-work')
+        //消息模块
+        implementation project(':module-msg')
         //用户模块
         implementation project(':module-user')
     }
+    testImplementation rootProject.ext.support["junit"]
+    //第三方底部Tabbar
+    implementation 'me.majiajie:pager-bottom-tab-strip:2.2.2'
+    //组件中依赖阿里路由编译框架
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
 }

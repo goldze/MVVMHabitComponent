@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="textColor">#333333</color>
+    <color name="textColorVice">#6C6C6C</color>
+    <color name="textColorRed">#D51717</color>
+    <color name="textColorHint">#999999</color>
+    <color name="appColor">#FF2041</color>
+    <color name="appBackColor">#F4F3F3</color>
+    <color name="viewLineColor">#F0F0F0</color>
+
+</resources>

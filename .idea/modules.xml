@@ -4,10 +4,13 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MVVMHabitComponent.iml" filepath="$PROJECT_DIR$/MVVMHabitComponent.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/base/base.iml" filepath="$PROJECT_DIR$/base/base.iml" />
-      <module fileurl="file://$PROJECT_DIR$/module-main/module-main.iml" filepath="$PROJECT_DIR$/module-main/module-main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library-base/library-base.iml" filepath="$PROJECT_DIR$/library-base/library-base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library-res/library-res.iml" filepath="$PROJECT_DIR$/library-res/library-res.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module-home/module-home.iml" filepath="$PROJECT_DIR$/module-home/module-home.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module-msg/module-msg.iml" filepath="$PROJECT_DIR$/module-msg/module-msg.iml" />
       <module fileurl="file://$PROJECT_DIR$/module-sign/module-sign.iml" filepath="$PROJECT_DIR$/module-sign/module-sign.iml" />
       <module fileurl="file://$PROJECT_DIR$/module-user/module-user.iml" filepath="$PROJECT_DIR$/module-user/module-user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module-work/module-work.iml" filepath="$PROJECT_DIR$/module-work/module-work.iml" />
     </modules>
   </component>
 </project>

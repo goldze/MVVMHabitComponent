@@ -1,2 +1,2 @@
-include ':app', ':base', ':module-sign', ':module-main', ':module-user'
+include ':app', ':library-base', ':module-sign', ':module-home', ':module-user', ':library-res', ':module-work', ':module-msg'
 

@@ -6,6 +6,8 @@ import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.goldze.base.router.RouterActivityPath;
+import com.goldze.sign.BR;
 import com.goldze.sign.R;
 import com.goldze.sign.databinding.ActivityLoginBinding;
 
@@ -15,7 +17,7 @@ import me.goldze.mvvmhabit.base.BaseActivity;
  * 一个MVVM模式的登陆界面
  * 作为登录验证模块的路由页
  */
-@Route(path = "/sign/Login")
+@Route(path = RouterActivityPath.Sign.SIGN_LOGIN)
 public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewModel> {
     //ActivityLoginBinding类是databinding框架自定生成的,对应activity_login.xml
     @Override
@@ -25,7 +27,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     public int initVariableId() {
-        return com.goldze.sign.BR.viewModel;
+        return BR.viewModel;
     }
 
     @Override

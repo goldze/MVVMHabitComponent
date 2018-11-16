@@ -1,0 +1,19 @@
+apply from: "../module.build.gradle"
+android {
+    defaultConfig {
+        //如果是独立模块，则使用当前组件的包名
+        if (isBuildModule.toBoolean()) {
+            applicationId "com.goldze.home"
+        }
+    }
+    //统一资源前缀，规范资源引用
+    resourcePrefix "home_"
+}
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //组件依赖基础库
+    api project(':library-base')
+    //组件中依赖阿里路由编译框架
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+    //单组件依赖的第三方库，这里不能用implementation，否则宿主项目会因为databinding运行时不能找到第三方类报编译错误
+}

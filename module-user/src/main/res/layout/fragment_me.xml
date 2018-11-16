@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.goldze.user.ui.viewmodel.MeViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/appBackColor"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="@{viewModel.loginBtnVisible}">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="用户组件"
+                android:textColor="@color/textColor" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@mipmap/btn_login"
+                android:gravity="center"
+                android:text="请先登录"
+                android:textColor="@color/white"
+                binding:onClickCommand="@{viewModel.startLoginOnClickCommand}" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="@{viewModel.loginBtnVisible == View.GONE ? View.VISIBLE : View.GONE}">
+
+            <TextView
+                android:textColor="@color/appColor"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text='@{@string/user_info + viewModel.userInfoObservable}' />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@mipmap/btn_login"
+                android:gravity="center"
+                android:text="退出登录"
+                android:textColor="@color/white"
+                binding:onClickCommand="@{viewModel.outLoginOnClickCommand}" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

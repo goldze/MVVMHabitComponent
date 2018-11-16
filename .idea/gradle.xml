@@ -9,10 +9,13 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/base" />
-            <option value="$PROJECT_DIR$/module-main" />
+            <option value="$PROJECT_DIR$/library-base" />
+            <option value="$PROJECT_DIR$/library-res" />
+            <option value="$PROJECT_DIR$/module-home" />
+            <option value="$PROJECT_DIR$/module-msg" />
             <option value="$PROJECT_DIR$/module-sign" />
             <option value="$PROJECT_DIR$/module-user" />
+            <option value="$PROJECT_DIR$/module-work" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
