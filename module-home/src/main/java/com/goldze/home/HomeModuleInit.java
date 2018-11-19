@@ -13,13 +13,13 @@ import me.goldze.mvvmhabit.utils.KLog;
 public class HomeModuleInit implements IModuleInit {
     @Override
     public boolean onInitAhead(Application application) {
-        KLog.e("主模块初始 -- onInitAhead");
+        KLog.e("首页模块初始 -- onInitAhead");
         return false;
     }
 
     @Override
     public boolean onInitLow(Application application) {
-        KLog.e("主模块初始 -- onInitLow");
+        KLog.e("首页模块初始 -- onInitLow");
         return false;
     }
 }
