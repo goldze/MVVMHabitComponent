@@ -5,3 +5,4 @@
 ##
 [戳我去MVVMHabit](https://github.com/goldze/MVVMHabit)
 ## 整体架构
+![](./img/img2.png) 
