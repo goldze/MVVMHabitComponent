@@ -51,11 +51,11 @@
             android:visibility="@{viewModel.loginBtnVisible == View.GONE ? View.VISIBLE : View.GONE}">
 
             <TextView
-                android:textColor="@color/appColor"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text='@{@string/user_info + viewModel.userInfoObservable}' />
+                android:text='@{@string/user_info + viewModel.userInfoObservable}'
+                android:textColor="@color/appColor" />
 
             <TextView
                 android:layout_width="100dp"
