@@ -1,4 +1,4 @@
-package com.goldze.work;
+package com.goldze.main;
 
 import org.junit.Test;
 

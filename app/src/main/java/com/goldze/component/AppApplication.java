@@ -13,8 +13,6 @@ public class AppApplication extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        //开启打印日志
-        KLog.init(true);
         //初始化组件(靠前)
         ModuleLifecycleConfig.getInstance().initModuleAhead(this);
         //....

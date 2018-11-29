@@ -10,9 +10,9 @@ public class RouterActivityPath {
     /**
      * 宿主组件
      */
-    public static class App {
+    public static class Main {
         /*主界面*/
-        public static final String APP_MAIN = "/app/Main";
+        public static final String MAIN_MAIN = "/main/Main";
     }
 
     /**

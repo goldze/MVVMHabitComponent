@@ -28,11 +28,13 @@
 
 **MVVMHabit + ARouter**：MVVM模式 + 组件化方案，前者是设计模式，后者是方案架构，两者并用，相得益彰。有这两个框架作支撑，事半功倍，可快速开发组件化应用。
 ## 2、项目搭建
+
 <img src="./img/img3.jpg" width="480" hegiht="480" align=center />
+
 ### 2.1、创建项目
 搭建组件化项目与单一工程项目一样，先通过Android Studio创建一个常规项目。
 
-File->New->New Project... 
+File->New->New Project...
 
 创建的这个项目将其定义为“宿主”(大多数人都是这种叫法)，也可以叫空壳项目。它没有太多逻辑，它的职责是将分工开发的组件合而为一，打包成一个可用的apk。
 

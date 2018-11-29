@@ -1,4 +1,4 @@
-package com.goldze.component.ui;
+package com.goldze.main.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,9 +9,9 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.goldze.base.router.RouterActivityPath;
 import com.goldze.base.router.RouterFragmentPath;
-import com.goldze.component.BR;
-import com.goldze.component.R;
-import com.goldze.component.databinding.ActivityMainBinding;
+import com.goldze.main.R;
+import com.goldze.main.BR;
+import com.goldze.main.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ import me.majiajie.pagerbottomtabstrip.listener.OnTabItemSelectedListener;
 /**
  * Created by goldze on 2018/6/21
  */
-@Route(path = RouterActivityPath.App.APP_MAIN)
+@Route(path = RouterActivityPath.Main.MAIN_MAIN)
 public class MainActivity extends BaseActivity<ActivityMainBinding, BaseViewModel> {
     private List<Fragment> mFragments;
 

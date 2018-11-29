@@ -23,6 +23,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            if (isBuildModule.toBoolean()) {
+                //独立运行
+                manifest.srcFile 'src/main/alone/AndroidManifest.xml'
+            } else {
+                //合并到宿主
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                resources {
+                    //正式版本时，排除debug文件夹下所有调试文件
+                    exclude 'src/debug/*'
+                }
+            }
+        }
+    }
     //统一资源前缀，规范资源引用
     resourcePrefix "app_"
     dataBinding {
@@ -37,6 +53,8 @@ dependencies {
         //组件独立运行时，宿主项目直接依赖基础库，避免编译错误
         implementation project(':library-base')
     } else {
+        //主业务模块
+        implementation project(':module-main')
         //身份验证模块
         implementation project(':module-sign')
         //应用模块
@@ -48,9 +66,4 @@ dependencies {
         //用户模块
         implementation project(':module-user')
     }
-    testImplementation rootProject.ext.support["junit"]
-    //第三方底部Tabbar
-    implementation 'me.majiajie:pager-bottom-tab-strip:2.2.2'
-    //组件中依赖阿里路由编译框架
-    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
 }

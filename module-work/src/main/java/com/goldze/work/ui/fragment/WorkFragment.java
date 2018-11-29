@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.goldze.base.router.RouterFragmentPath;
-import com.goldze.work.BR;
 import com.goldze.work.R;
+import com.goldze.work.BR;
 import com.goldze.work.databinding.FragmentWorkBinding;
 import com.goldze.work.ui.viewmodel.WorkViewModel;
 

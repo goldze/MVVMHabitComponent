@@ -1,0 +1,6 @@
+<resources>
+    <!--StartActivity Style 冷启动效果-->
+    <style name="AppTheme.Start">
+        <item name="android:windowBackground">@drawable/activity_start</item>
+    </style>
+</resources>

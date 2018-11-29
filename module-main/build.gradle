@@ -1,0 +1,21 @@
+apply from: "../module.build.gradle"
+android {
+    defaultConfig {
+        //如果是独立模块，则使用当前组件的包名
+        if (isBuildModule.toBoolean()) {
+            applicationId "com.goldze.main"
+        }
+    }
+    //统一资源前缀，规范资源引用
+    resourcePrefix "main_"
+}
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation rootProject.ext.support["junit"]
+    //组件依赖基础库
+    api project(':library-base')
+    //第三方底部Tabbar(这里要用api依赖, 不能用implementation，不然当宿主打包的时候自动生成的databinding无法编译该库的类
+    api 'me.majiajie:pager-bottom-tab-strip:2.2.2'
+    //组件中依赖阿里路由编译框架
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+}
