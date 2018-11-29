@@ -59,8 +59,8 @@ ext {
             //MVVMHabit
             "MVVMHabit"                            : "com.github.goldze:MVVMHabit:3.0.6",
             //阿里路由框架
-            "arouter-api"                          : "com.alibaba:arouter-api:1.4.0",
-            "arouter-compiler"                     : "com.alibaba:arouter-compiler:1.2.0",
+            "arouter-api"                          : "com.alibaba:arouter-api:1.4.1",
+            "arouter-compiler"                     : "com.alibaba:arouter-compiler:1.2.2",
     ]
 }
 
