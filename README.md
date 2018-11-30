@@ -112,7 +112,9 @@ dependencies {
 ### 2.3、gradle配置
 > gradle是组件化的基石，想搭建好组件化项目，gradle知识一定要扎实（Android已经留下了gradle的烙印）。
 #### 2.3.1、依赖关系
-项目创建好后，需要将他们串联起来，组合在一起。
+项目创建好后，需要将他们串联起来，组合在一起。依赖关系如下图所示：
+
+<img src="./img/img5.png" width="480" hegiht="480" align=center />
 
 宿主依赖业务组件
 ```gradle
@@ -121,7 +123,7 @@ dependencies {
     implementation project(':module-main')
     //身份验证模块
     implementation project(':module-sign')
-    //应用模块
+    //首页模块
     implementation project(':module-home')
     //工作模块
     implementation project(':module-work')
@@ -136,6 +138,7 @@ dependencies {
 dependencies {
     //组件依赖基础库
     api project(':library-base')
+	//按需依赖第三方组件
 }
 ```
 library-base依赖公共库
@@ -153,15 +156,22 @@ dependencies {
     //其他公共库，例如图片选择、分享、推送等
 }
 ```
-最终产生的流程如下图所示：
 
 #### 2.3.2、模式开关
+需要一个全局变量来控制当前运行的工程是隔离状态，还是合并状态。在gradle.properties中定义：
+
+```gradle
+isBuildModule=false
+```
+isBuildModule 为 true 时可以使每个组件独立运行，false 则可以将所有组件集成到宿主 App 中。
 
 #### 2.3.3、debug配置
 
 #### 2.3.4、资源冲突
 
 #### 2.3.5、配置抽取
+
+### 2.4、总结
 
 ## 3、可行性分析
 ### 3.1、组件初始化
