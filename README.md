@@ -114,7 +114,7 @@ dependencies {
 #### 2.3.1、依赖关系
 项目创建好后，需要将他们串联起来，组合在一起。依赖关系如下图所示：
 
-<img src="./img/img5.png" width="480" hegiht="480" align=center />
+<img src="./img/img5.png" width="640" hegiht="640" align=center />
 
 宿主依赖业务组件
 ```gradle
@@ -177,4 +177,6 @@ isBuildModule 为 true 时可以使每个组件独立运行，false 则可以将
 ### 3.1、组件初始化
 
 ### 3.2、组件间通信
+
+### 3.3、总结
 
