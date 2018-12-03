@@ -3,7 +3,7 @@
 
 <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=a8db5d8f95bc432606fd79c3d6e494e8a97401671c27de4a8fe975382a441a3e"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="MVVMHabit-Family" title="MVVMHabit-Family"></a>
 ##
-> 如果不了解MVVMHabit的可以先学习下：[戳我去MVVMHabit](https://github.com/goldze/MVVMHabit)
+> **原文地址：** [https://github.com/goldze/MVVMHabitComponent](https://github.com/goldze/MVVMHabitComponent)
 ## 整体架构
 <img src="./img/img1.png" width="640" hegiht="640" align=center />
 
@@ -331,6 +331,7 @@ dependencies {
 
 ### 2.4、完成
 到此为止，一个最基本的组件化工程搭建完毕。
+
 ## 3、可行性分析
 ### 3.1、组件初始化
 
