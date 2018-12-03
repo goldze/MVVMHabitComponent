@@ -16,7 +16,7 @@
 
 对于简单的小项目，大多都采用的是单一工程，独立开发。由于项目不大，编译速度及维护成本这些也在接受范围之内。而对于做好一个App产品，这种多人合作、单一工程的App架构势必会影响开发效率，增加项目的维护成本。每个开发者都要熟悉如此之多的代码，将很难进行多人协作开发，而且Android项目在编译代码的时候电脑会非常卡，又因为单一工程下代码耦合严重，每修改一处代码后都要重新编译打包测试，导致非常耗时，最重要的是这样的代码想要做单元测试根本无从下手，所以必须要有更灵活的架构代替过去单一的工程架构。
 
-从下图可以看出，使用组件化方案架构，各个模块之间将是独立无耦合的，所有组件寄托于宿主App，独立于其他组件之外，各自编译自己的模块，有利于多人团队协作开发。
+使用组件化方案架构，高内聚，低耦合，代码边界清晰，每一个组件都可以拆分出来独立运行。所有组件寄托于宿主App，加载分离的各个组件，各自编译自己的模块，有利于多人团队协作开发。
 
 <img src="./img/img2.png" width="480" hegiht="480" align=center />
 
@@ -109,7 +109,7 @@ dependencies {
 通过组件化，可以按照业务大致将项目拆分为：**首页模块**、**工作模块**、**消息模块**、**用户模块**，当然还可以再分细一点，比如用户模块再分离一个**身份验证模块**出来。拆分的越细，复用起来就越方便。
 
 那么在上面2.1.2节创建组件时，则创建以下几个组件Module：**module-home**、**module-work**、**module-msg**、**module-user**、**module-sign**。
-### 2.3、gradle配置
+### 2.3、组件配置
 > gradle是组件化的基石，想搭建好组件化项目，gradle知识一定要扎实（Android已经留下了gradle的烙印）。
 #### 2.3.1、依赖关系
 项目创建好后，需要将他们串联起来，组合在一起。依赖关系如下图所示：
@@ -156,23 +156,181 @@ dependencies {
     //其他公共库，例如图片选择、分享、推送等
 }
 ```
+#### 2.3.2、开启dataBinding
+Android MVVM模式离不开DataBinding，每个组件中都需要开启，包括宿主App
 
-#### 2.3.2、模式开关
-需要一个全局变量来控制当前运行的工程是隔离状态，还是合并状态。在gradle.properties中定义：
+```gradle
+android {
+    //开启DataBinding
+    dataBinding {
+        enabled true
+    }
+}
+```
+
+#### 2.3.3、模式开关
+需要一个全局变量来控制当前运行的工程是隔离状态还是合并状态。在gradle.properties中定义：
 
 ```gradle
 isBuildModule=false
 ```
 isBuildModule 为 true 时可以使每个组件独立运行，false 则可以将所有组件集成到宿主 App 中。
 
-#### 2.3.3、debug配置
+#### 2.3.4、debug切换
+在组件的build.gradle中动态切换library与application
 
-#### 2.3.4、资源冲突
+```gradle
+if (isBuildModule.toBoolean()) {
+    //作为独立App应用运行
+    apply plugin: 'com.android.application'
+} else {
+    //作为组件运行
+    apply plugin: 'com.android.library'
+}
+```
+当　isBuildModule 为 true 时，它是一个application，拥有自己的包名
 
-#### 2.3.5、配置抽取
+```gradle
+android {
+    defaultConfig {
+        //如果是独立模块，则使用当前组件的包名
+        if (isBuildModule.toBoolean()) {
+            applicationId 组件的包名
+        }
+    }
+}
+```
+#### 2.3.4、manifest配置
+组件在自己的AndroidManifest.xml各自配置，application标签无需添加属性，也不需要指定activity的intent-filter。当合并打包时，gradle会将每个组件的AndroidManifest合并到宿主App中。
+```xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.goldze.main">
+    <application>
+        ...
+    </application>
+</manifest>
+```
+组件独立运行时，就需要单独的一个AndroidManifest.xml作为调试用。可以在src/main文件夹下创建一个alone/AndroidManifest.xml。配置application标签属性，并指定启动的activity。
 
-### 2.4、总结
+```xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.goldze.main">
+    <application
+        android:name="com.goldze.base.debug.DebugApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/main_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".debug.DebugActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
+```
+并在build.gradle中配置
+
+```gradle
+android {
+    sourceSets {
+        main {
+            ...
+            if (isBuildModule.toBoolean()) {
+                //独立运行
+                manifest.srcFile 'src/main/alone/AndroidManifest.xml'
+            } else {
+                //合并到宿主
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                resources {
+                    //正式版本时，排除alone文件夹下所有调试文件
+                    exclude 'src/main/alone/*'
+                }
+            }
+        }
+    }
+}
+```
+#### 2.3.5、统一资源
+在组件的build.gradle配置统一资源前缀
+
+```gradle
+android {
+    //统一资源前缀，规范资源引用
+    resourcePrefix "组件名_"
+}
+```
+#### 2.3.6、配置抽取
+可以将每个组件的build.gradle公共部分抽取出一个module.build.gradle
+
+```gradle
+if (isBuildModule.toBoolean()) {
+    //作为独立App应用运行
+    apply plugin: 'com.android.application'
+} else {
+    //作为组件运行
+    apply plugin: 'com.android.library'
+}
+android {
+    ...
+    defaultConfig {
+        ...
+        //阿里路由框架配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+    sourceSets {
+        main {
+            if (isBuildModule.toBoolean()) {
+                //独立运行
+                manifest.srcFile 'src/main/alone/AndroidManifest.xml'
+            } else {
+                //合并到宿主
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                resources {
+                    //正式版本时，排除alone文件夹下所有调试文件
+                    exclude 'src/main/alone/*'
+                }
+            }
+        }
+    }
+    buildTypes {
+        ...
+    }
+    dataBinding {
+        enabled true
+    }
+}
+```
+
+组件中引入module.build.gradle
+
+```gradle
+apply from: "../module.build.gradle"
+android {
+    defaultConfig {
+        //如果是独立模块，则使用当前组件的包名
+        if (isBuildModule.toBoolean()) {
+            applicationId 组件的包名
+        }
+    }
+    //统一资源前缀，规范资源引用
+    resourcePrefix "组件名_"
+}
+dependencies {
+    ...
+}
+```
+
+### 2.4、完成
+到此为止，一个最基本的组件化工程搭建完毕。
 ## 3、可行性分析
 ### 3.1、组件初始化
 
