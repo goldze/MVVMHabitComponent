@@ -40,10 +40,10 @@
 
 创建的这个项目将其定义为“宿主”(大多数人都是这种叫法)，也可以叫空壳项目。它没有layout，没有activity，它的职责是将分工开发的组件合而为一，打包成一个可用的Apk。
 
-在宿主工程中，主要包含两个东西，一个是AndroidManifest.xml：配置application、启动页面等；另一个是build.gradle：负责配置构建编译/打包参数，依赖子模块。
+在宿主工程中，主要包含两个东西，一个是**AndroidManifest.xml**：配置application、启动页面等；另一个是**build.gradle**：负责配置构建编译/打包参数，依赖子模块。
 
 #### 2.1.2、创建组件
-所谓的组件，其实也就是一个Module，不过这个Module有点特殊，在合并打包的时候它是一个library：apply plugin: ‘com.android.library’，在独立编译运行的时候，它是一个application：apply plugin: ‘com.android.application’。
+所谓的组件，其实也就是一个Module，不过这个Module有点特殊，在合并打包的时候它是一个**library：apply plugin: ‘com.android.library’**，在独立编译运行的时候，它是一个**application：apply plugin: ‘com.android.application’**。
 
 **File->New->New Module->Android Library...**
 
