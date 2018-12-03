@@ -310,7 +310,7 @@ android {
 }
 ```
 
-组件中引入module.build.gradle
+组件中引入module.build.gradle即可
 
 ```gradle
 apply from: "../module.build.gradle"
