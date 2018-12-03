@@ -1,5 +1,5 @@
 # MVVMHabitComponent
-关于Android的组件化，相信大家并不陌生，网上谈论组件化的文章，多如过江之鲫，然而一篇基于MVVM模式的组件化方案却很少。结合自身的调研和探索，在此分享一篇基于[MVVMHabit](https://github.com/goldze/MVVMHabit)框架的一套Android-Databinding组件化开发方案。文章写的非常基础，目标是让学习了此方案的开发人员都可以搭建MVVM组件化项目。
+关于Android的组件化，相信大家并不陌生，网上谈论组件化的文章，多如过江之鲫，然而一篇基于MVVM模式的组件化方案却很少。结合自身的调研和探索，在此分享一篇基于[MVVMHabit](https://github.com/goldze/MVVMHabit)框架的一套Android-Databinding组件化开发方案。文章写的比较简单基础，没有深入的技术点讨论，目的是让学习了此方案的开发人员都可以快速上手搭建MVVM组件化项目。
 
 <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=a8db5d8f95bc432606fd79c3d6e494e8a97401671c27de4a8fe975382a441a3e"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="MVVMHabit-Family" title="MVVMHabit-Family"></a>
 ##
@@ -47,7 +47,7 @@
 
 **File->New->New Module->Android Library...**
 
-一般可以取名为module-xxx(组件名)
+一般可以取名为**module-xxx(组件名)**
 
 #### 2.1.3、创建Library
 除了业务组件之外，还需要创建两个基础Library，**library-base** 和 **library-res**。
@@ -200,7 +200,7 @@ android {
     }
 }
 ```
-#### 2.3.4、manifest配置
+#### 2.3.5、manifest配置
 组件在自己的AndroidManifest.xml各自配置，application标签无需添加属性，也不需要指定activity的intent-filter。当合并打包时，gradle会将每个组件的AndroidManifest合并到宿主App中。
 ```xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -255,7 +255,7 @@ android {
     }
 }
 ```
-#### 2.3.5、统一资源
+#### 2.3.6、统一资源
 在组件的build.gradle配置统一资源前缀
 
 ```gradle
@@ -264,7 +264,7 @@ android {
     resourcePrefix "组件名_"
 }
 ```
-#### 2.3.6、配置抽取
+#### 2.3.7、配置抽取
 可以将每个组件的build.gradle公共部分抽取出一个module.build.gradle
 
 ```gradle
@@ -334,8 +334,28 @@ dependencies {
 
 ## 3、可行性分析
 ### 3.1、组件初始化
+> 组件在独立运行时，也就是debug期，有单独的manifest，当然也就可以指定Application类进行初始化。那么当组件进行合并的时，Application只能有一个，并且存在宿主App中，组件该如何进行初始化？
+#### 3.1.1、反射
+
+#### 3.1.2、反射接口
+
+#### 3.1.3、初始化实现
 
 ### 3.2、组件间通信
+> 组件间是完全无耦合的存在，但是在实际开发中肯定会存在业务交叉的情况，该如何实现无联系的组件间通信呢？
+#### 3.2.1、ARouter
 
-### 3.3、总结
+#### 3.2.2、事件总线(RxBus)
+
+### 3.3、base规则
+
+#### 3.3.1、config
+
+#### 3.3.2、contract
+
+#### 3.3.3、global
+
+#### 3.3.4、router
+
+### 3.4、总结
 
