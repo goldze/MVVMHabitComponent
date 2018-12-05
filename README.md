@@ -375,7 +375,7 @@ public void onCreate() {
 
 <img src="./img/img6.png" width="480" hegiht="480" align=center />
 
-**小优化：**当组件独立运行时，宿主App不会执行onCreate方法，但是组件业务又需要初始化单独调试。常规做法是组件中单独定义Application，但这样每个组件都需要创建一个Application，比较繁琐。我们有了上述的初始化方法，可以在 **library-base** 中定义一个 **DebugApplication** ，debug包下的代码不参与编译，仅作为独立模块运行时初始化数据。最后记得在组件的调试版alone/AndroidManifest下指定为base中的 **DebugApplication**。
+**小优化：** 当组件独立运行时，宿主App不会执行onCreate方法，但是组件业务又需要初始化单独调试。常规做法是组件中单独定义Application，但这样每个组件都需要创建一个Application，比较繁琐。我们有了上述的初始化方法，可以在 **library-base** 中定义一个 **DebugApplication** ，debug包下的代码不参与编译，仅作为独立模块运行时初始化数据。最后记得在组件的调试版alone/AndroidManifest下指定为base中的 **DebugApplication**。
 
 ### 3.2、组件间通信
 > 组件间是完全无耦合的存在，但是在实际开发中肯定会存在业务交叉的情况，该如何实现无联系的组件间通信呢？

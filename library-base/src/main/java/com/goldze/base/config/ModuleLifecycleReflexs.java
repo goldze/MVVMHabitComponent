@@ -9,7 +9,7 @@ package com.goldze.base.config;
 public class ModuleLifecycleReflexs {
     private static final String BaseInit = "com.goldze.base.base.BaseModuleInit";
     //主业务模块
-    private static final String MainInit = "com.goldze.sign.SignModuleInit";
+    private static final String MainInit = "com.goldze.main.MainModuleInit";
     //登录验证模块
     private static final String SignInit = "com.goldze.sign.SignModuleInit";
     //首页业务模块
