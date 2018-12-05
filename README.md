@@ -216,18 +216,13 @@ android {
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.goldze.main">
     <application
-        android:name="com.goldze.base.debug.DebugApplication"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/main_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".debug.DebugActivity">
+        ...
+        >
+        <activity 
+            ...
+            >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                ...
             </intent-filter>
         </activity>
     </application>
@@ -336,10 +331,51 @@ dependencies {
 ### 3.1、组件初始化
 > 组件在独立运行时，也就是debug期，有单独的manifest，当然也就可以指定Application类进行初始化。那么当组件进行合并的时，Application只能有一个，并且存在宿主App中，组件该如何进行初始化？
 #### 3.1.1、反射
+反射是一种解决组件初始化的方法。
 
-#### 3.1.2、反射接口
+在library-base下定义一个 **[ModuleLifecycleConfig](https://github.com/goldze/MVVMHabitComponent/blob/master/library-base/src/main/java/com/goldze/base/config/ModuleLifecycleConfig.java)** 单例类，主要包含两个公共方法：initModuleAhead(先初始化)、initModuleLow(后初始化)。
+
+**为何这里要定义两个初始化方法？**
+
+组件多了，必定会涉及到初始化的先后顺序问题，组件中依赖的第三方库，有些库需要尽早初始化，有些可以稍晚一些。比如ARouter的init方法，官方要求尽可能早，那么就可以写在library-base初始化类的onInitAhead中，优先初始化。
+
+再定义一个组件生命周期管理类 **[ModuleLifecycleReflexs](https://github.com/goldze/MVVMHabitComponent/blob/master/library-base/src/main/java/com/goldze/base/config/ModuleLifecycleReflexs.java)** ，在这里注册组件初始化的类名全路径，通过反射动态调用各个组件的初始化方法。
+
+**注意：组件中初始化的Module类不能被混淆**
+
+#### 3.1.2、初始化接口
+定义一个 **[IModuleInit](https://github.com/goldze/MVVMHabitComponent/blob/master/library-base/src/main/java/com/goldze/base/base/IModuleInit.java)**
+接口，动态配置Application，需要初始化的组件实现该接口，统一在宿主app的Application中初始化
+```java
+public interface IModuleInit {
+    //初始化优先的
+    boolean onInitAhead(Application application);
+
+    //初始化靠后的
+    boolean onInitLow(Application application);
+}
+```
 
 #### 3.1.3、初始化实现
+反射类和接口都有了，那么在各自的组件中创建一个初始化类，实现IModuleInit接口。最后在宿主的Application中调用初始化方法
+
+```java
+@Override
+public void onCreate() {
+    super.onCreate();
+    //初始化组件(靠前)
+    ModuleLifecycleConfig.getInstance().initModuleAhead(this);
+    //....
+    //初始化组件(靠后)
+    ModuleLifecycleConfig.getInstance().initModuleLow(this);
+}
+```
+
+最后即实现组件的初始化效果
+
+<img src="./img/img6.png" width="480" hegiht="480" align=center />
+
+**小优化：**当组件独立运行时，宿主App不会执行onCreate方法，但是组件业务又需要初始化单独调试。常规做法是组件中单独定义Application，但这样每个组件都需要创建一个Application，比较繁琐。我们有了上述的初始化方法，可以在 **library-base** 中定义一个 **DebugApplication** ，debug包下的代码不参与编译，仅作为独立模块运行时初始化数据。最后记得在组件的调试版alone/AndroidManifest下指定为base中的 **DebugApplication**。
 
 ### 3.2、组件间通信
 > 组件间是完全无耦合的存在，但是在实际开发中肯定会存在业务交叉的情况，该如何实现无联系的组件间通信呢？

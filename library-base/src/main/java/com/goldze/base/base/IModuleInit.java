@@ -13,5 +13,4 @@ public interface IModuleInit {
 
     //初始化靠后的
     boolean onInitLow(Application application);
-
 }
