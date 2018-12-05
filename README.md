@@ -1,5 +1,5 @@
 # MVVMHabitComponent
-关于Android的组件化，相信大家并不陌生，网上谈论组件化的文章，多如过江之鲫，然而一篇基于MVVM模式的组件化方案却很少。结合自身的调研和探索，在此分享一篇基于[MVVMHabit](https://github.com/goldze/MVVMHabit)框架的一套Android-Databinding组件化开发方案。文章写的比较简单基础，没有深入的技术点讨论，目的是让学习了此方案的开发人员都可以快速上手搭建MVVM组件化项目。
+关于Android的组件化，相信大家并不陌生，网上谈论组件化的文章，多如过江之鲫，然而一篇基于MVVM模式的组件化方案却很少。结合自身的调研和探索，在此分享一篇基于[MVVMHabit](https://github.com/goldze/MVVMHabit)框架的一套Android-Databinding组件化开发方案。文章写的比较简单基础，没有大篇幅单向技术的讨论点，目的是让学习了此方案的开发人员都可以快速上手搭建MVVM组件化项目。
 
 <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=a8db5d8f95bc432606fd79c3d6e494e8a97401671c27de4a8fe975382a441a3e"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="MVVMHabit-Family" title="MVVMHabit-Family"></a>
 ##
@@ -52,9 +52,9 @@
 #### 2.1.3、创建Library
 除了业务组件之外，还需要创建两个基础Library，**library-base** 和 **library-res**。
 
-**library-base**：存放一些公共方法、公共常量、组件通信的契约类等。上层被所有组件依赖，下层依赖公共资源库、图片选择库、路由库等通用库，通过它，避免了组件直接依赖各种通用库，承上启下，作为整个组件化的核心库。
+- **library-base**：存放一些公共方法、公共常量、组件通信的契约类等。上层被所有组件依赖，下层依赖公共资源库、图片选择库、路由库等通用库，通过它，避免了组件直接依赖各种通用库，承上启下，作为整个组件化的核心库。
 
-**library-res**：为了缓解base库的压力，专门分离出一个公共资源库，被base库所依赖，主要存放与res相关的公共数据，比如图片、style、anim、color等。
+- **library-res**：为了缓解base库的压力，专门分离出一个公共资源库，被base库所依赖，主要存放与res相关的公共数据，比如图片、style、anim、color等。
 
 #### 2.1.4、第三方框架
 还需要准备两个第三方的框架，即前面说的 **[MVVMHabit](https://github.com/goldze/MVVMHabit)** 和 **[ARouter](https://github.com/alibaba/ARouter)**，使用远程依赖。
@@ -380,6 +380,7 @@ public void onCreate() {
 ### 3.2、组件间通信
 > 组件间是完全无耦合的存在，但是在实际开发中肯定会存在业务交叉的情况，该如何实现无联系的组件间通信呢？
 #### 3.2.1、ARouter
+**ARouter** 之所以作为整个组件化的核心，是因为它拥有强大的路由机制。
 
 #### 3.2.2、事件总线(RxBus)
 
@@ -393,5 +394,5 @@ public void onCreate() {
 
 #### 3.3.4、router
 
-### 3.4、总结
+## 4、总结
 
