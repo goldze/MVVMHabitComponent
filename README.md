@@ -327,7 +327,7 @@ dependencies {
 ### 2.4、完成
 到此为止，一个最基本的组件化工程搭建完毕。
 
-## 3、可行性分析
+## 3、可行性方案
 ### 3.1、组件初始化
 > 组件在独立运行时，也就是debug期，有单独的manifest，当然也就可以指定Application类进行初始化。那么当组件进行合并的时，Application只能有一个，并且存在宿主App中，组件该如何进行初始化？
 #### 3.1.1、反射
@@ -338,6 +338,20 @@ dependencies {
 **为何这里要定义两个初始化方法？**
 
 组件多了，必定会涉及到初始化的先后顺序问题，组件中依赖的第三方库，有些库需要尽早初始化，有些可以稍晚一些。比如ARouter的init方法，官方要求尽可能早，那么就可以写在library-base初始化类的onInitAhead中，优先初始化。
+
+```java
+@Override
+public boolean onInitAhead(Application application) {
+    KLog.init(true);
+    //初始化阿里路由框架
+    if (BuildConfig.DEBUG) {
+        ARouter.openLog();     // 打印日志
+        ARouter.openDebug();   // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
+    }
+    ARouter.init(application); // 尽可能早，推荐在Application中初始化
+    return false;
+}
+```
 
 再定义一个组件生命周期管理类 **[ModuleLifecycleReflexs](https://github.com/goldze/MVVMHabitComponent/blob/master/library-base/src/main/java/com/goldze/base/config/ModuleLifecycleReflexs.java)** ，在这里注册组件初始化的类名全路径，通过反射动态调用各个组件的初始化方法。
 
@@ -380,8 +394,18 @@ public void onCreate() {
 ### 3.2、组件间通信
 > 组件间是完全无耦合的存在，但是在实际开发中肯定会存在业务交叉的情况，该如何实现无联系的组件间通信呢？
 #### 3.2.1、ARouter
-**ARouter** 之所以作为整个组件化的核心，是因为它拥有强大的路由机制。
+ARouter之所以作为整个组件化的核心，是因为它拥有强大的路由机制。ARouter在library-base中依赖，所有组件又依赖于library-base，所以它可以看作为组件间通信的桥梁。
 
+<img src="./img/img7.png" width="320" hegiht="320" align=center />
+
+在组件A中跳转到组件B页面：
+
+```java
+ARouter.getInstance()
+.build(router_url)
+.withString(key, value)
+.navigation();
+```
 #### 3.2.2、事件总线(RxBus)
 
 ### 3.3、base规则
