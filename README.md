@@ -38,7 +38,7 @@
 
 **File->New->New Project...**
 
-创建的这个项目将其定义为“宿主”(大多数人都是这种叫法)，也可以叫空壳项目。它没有layout，没有activity，它的职责是将分工开发的组件合而为一，打包成一个可用的Apk。
+创建的这个项目将其定义为“ **宿主** ”(大多数人都是这种叫法)，也可以叫空壳项目。它没有layout，没有activity，它的职责是将分工开发的组件合而为一，打包成一个可用的Apk。
 
 在宿主工程中，主要包含两个东西，一个是**AndroidManifest.xml**：配置application、启动页面等；另一个是**build.gradle**：负责配置构建编译/打包参数，依赖子模块。
 
@@ -56,8 +56,8 @@
 
 - **library-res**：为了缓解base库的压力，专门分离出一个公共资源库，被base库所依赖，主要存放与res相关的公共数据，比如图片、style、anim、color等。
 
-#### 2.1.4、第三方框架
-还需要准备两个第三方的框架，即前面说的 **[MVVMHabit](https://github.com/goldze/MVVMHabit)** 和 **[ARouter](https://github.com/alibaba/ARouter)**，使用远程依赖。
+#### 2.1.4、第三方框架准备
+还需要准备两个第三方的框架，即前面说的 **[MVVMHabit](https://github.com/goldze/MVVMHabit)** 和 **[ARouter](https://github.com/alibaba/ARouter)**，可使用远程依赖。
 
 **MVVMHabit**：
 
@@ -326,6 +326,7 @@ dependencies {
 
 ### 2.4、完成
 运行效果如下：
+
 <img src="./img/img8.jpg" width="240" hegiht="240" align=center />
 
 到此为止，一个最基本的组件化工程搭建完毕。
@@ -397,7 +398,7 @@ public void onCreate() {
 ### 3.2、组件间通信
 > 组件间是完全无耦合的存在，但是在实际开发中肯定会存在业务交叉的情况，该如何实现无联系的组件间通信呢？
 #### 3.2.1、ARouter
-**[ARouter](https://github.com/alibaba/ARouter)**之所以作为整个组件化的核心，是因为它拥有强大的路由机制。ARouter在library-base中依赖，所有组件又依赖于library-base，所以它可以看作为组件间通信的桥梁。
+**[ARouter](https://github.com/alibaba/ARouter)** 之所以作为整个组件化的核心，是因为它拥有强大的路由机制。ARouter在library-base中依赖，所有组件又依赖于library-base，所以它可以看作为组件间通信的桥梁。
 
 <img src="./img/img7.png" width="320" hegiht="320" align=center />
 
@@ -418,7 +419,7 @@ String value;
 
 更多ARouter用法：**[https://github.com/alibaba/ARouter/blob/master/README_CN.md](https://github.com/alibaba/ARouter/blob/master/README_CN.md)**
 #### 3.2.2、事件总线(RxBus)
-**[MVVMHabit](https://github.com/goldze/MVVMHabit)**中提供了RxBus，可作为全局事件的通信工具。
+**[MVVMHabit](https://github.com/goldze/MVVMHabit)** 中提供了RxBus，可作为全局事件的通信工具。
 
 当组件B页面需要回传数据给组件A时，可以调用：
 
