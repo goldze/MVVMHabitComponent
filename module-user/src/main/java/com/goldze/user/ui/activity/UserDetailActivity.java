@@ -16,7 +16,7 @@ import me.goldze.mvvmhabit.base.BaseActivity;
 /**
  * Created by goldze on 2018/6/21.
  */
-@Route(path = RouterActivityPath.User.USER_USERDETAIL)
+@Route(path = RouterActivityPath.User.PAGER_USERDETAIL)
 public class UserDetailActivity extends BaseActivity<ActivityUserDetailBinding, UserDetailViewModel> {
     //拿到路由过来的参数
     @Autowired()

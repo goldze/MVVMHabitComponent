@@ -19,7 +19,7 @@ import me.goldze.mvvmhabit.base.BaseFragment;
 /**
  * Created by goldze on 2018/6/21
  */
-@Route(path = RouterFragmentPath.Work.WORK_WORK)
+@Route(path = RouterFragmentPath.Work.PAGER_WORK)
 public class WorkFragment extends BaseFragment<FragmentWorkBinding, WorkViewModel> {
     @Override
     public int initContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

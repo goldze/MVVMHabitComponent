@@ -11,29 +11,35 @@ public class RouterFragmentPath {
      * 首页组件
      */
     public static class Home {
+        private static final String HOME = "/home";
         /*首页*/
-        public static final String HOME_HOME = "/home/Home";
+        public static final String PAGER_HOME = HOME + "/Home";
     }
 
     /**
      * 工作组件
      */
     public static class Work {
+        private static final String WORK = "/work";
         /*工作*/
-        public static final String WORK_WORK = "/work/Work";
+        public static final String PAGER_WORK = WORK + "/Work";
     }
+
     /**
      * 消息组件
      */
     public static class Msg {
+        private static final String MSG = "/msg";
         /*消息*/
-        public static final String MSG_MSG = "/msg/Msg";
+        public static final String PAGER_MSG = MSG + "/msg/Msg";
     }
+
     /**
      * 用户组件
      */
     public static class User {
+        private static final String USER = "/user";
         /*我的*/
-        public static final String USER_ME = "/user/Me";
+        public static final String PAGER_ME = USER + "/Me";
     }
 }

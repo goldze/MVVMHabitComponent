@@ -18,7 +18,7 @@ import me.goldze.mvvmhabit.base.BaseFragment;
 /**
  * Created by goldze on 2018/6/21
  */
-@Route(path = RouterFragmentPath.Msg.MSG_MSG)
+@Route(path = RouterFragmentPath.Msg.PAGER_MSG)
 public class MsgFragment extends BaseFragment<FragmentMsgBinding, MsgViewModel> {
     @Override
     public int initContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

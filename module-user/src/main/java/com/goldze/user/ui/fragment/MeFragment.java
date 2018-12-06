@@ -18,7 +18,7 @@ import me.goldze.mvvmhabit.base.BaseFragment;
 /**
  * Created by goldze on 2018/6/21
  */
-@Route(path = RouterFragmentPath.User.USER_ME)
+@Route(path = RouterFragmentPath.User.PAGER_ME)
 public class MeFragment extends BaseFragment<FragmentMeBinding, MeViewModel> {
     @Override
     public int initContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

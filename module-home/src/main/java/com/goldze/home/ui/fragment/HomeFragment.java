@@ -18,7 +18,7 @@ import me.goldze.mvvmhabit.base.BaseFragment;
 /**
  * Created by goldze on 2018/6/21
  */
-@Route(path = RouterFragmentPath.Home.HOME_HOME)
+@Route(path = RouterFragmentPath.Home.PAGER_HOME)
 public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewModel> {
     @Override
     public int initContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

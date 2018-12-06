@@ -55,7 +55,7 @@ public class MeViewModel extends BaseViewModel {
         @Override
         public void call() {
             //采用ARouter+RxBus实现组件间通信
-            ARouter.getInstance().build(RouterActivityPath.Sign.SIGN_LOGIN).navigation();
+            ARouter.getInstance().build(RouterActivityPath.Sign.PAGER_LOGIN).navigation();
             subscribe = RxBus.getDefault().toObservable(_Login.class)
                     .subscribe(new Consumer<_Login>() {
                         @Override

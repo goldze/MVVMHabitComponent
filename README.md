@@ -325,6 +325,9 @@ dependencies {
 ```
 
 ### 2.4、完成
+运行效果如下：
+<img src="./img/img8.jpg" width="240" hegiht="240" align=center />
+
 到此为止，一个最基本的组件化工程搭建完毕。
 
 ## 3、可行性方案
@@ -394,7 +397,7 @@ public void onCreate() {
 ### 3.2、组件间通信
 > 组件间是完全无耦合的存在，但是在实际开发中肯定会存在业务交叉的情况，该如何实现无联系的组件间通信呢？
 #### 3.2.1、ARouter
-ARouter之所以作为整个组件化的核心，是因为它拥有强大的路由机制。ARouter在library-base中依赖，所有组件又依赖于library-base，所以它可以看作为组件间通信的桥梁。
+**[ARouter](https://github.com/alibaba/ARouter)**之所以作为整个组件化的核心，是因为它拥有强大的路由机制。ARouter在library-base中依赖，所有组件又依赖于library-base，所以它可以看作为组件间通信的桥梁。
 
 <img src="./img/img7.png" width="320" hegiht="320" align=center />
 
@@ -402,21 +405,68 @@ ARouter之所以作为整个组件化的核心，是因为它拥有强大的路�
 
 ```java
 ARouter.getInstance()
-.build(router_url)
-.withString(key, value)
-.navigation();
+    .build(router_url)
+    .withString(key, value)
+    .navigation();
 ```
+在组件B页面中接收传过来的参数：
+
+```java
+@Autowired(name = key)
+String value;
+```
+
+更多ARouter用法：**[https://github.com/alibaba/ARouter/blob/master/README_CN.md](https://github.com/alibaba/ARouter/blob/master/README_CN.md)**
 #### 3.2.2、事件总线(RxBus)
+**[MVVMHabit](https://github.com/goldze/MVVMHabit)**中提供了RxBus，可作为全局事件的通信工具。
 
-### 3.3、base规则
+当组件B页面需要回传数据给组件A时，可以调用：
 
+```java
+_Login _login = new _Login();
+RxBus.getDefault().post(_login);
+```
+
+在组件A中注册接收(注册在调用之前完成)：
+
+```java
+subscribe = RxBus.getDefault().toObservable(_Login.class)
+    .subscribe(new Consumer<_Login>() {
+        @Override
+        public void accept(_Login l) throws Exception {
+            //登录成功后重新刷新数据
+            initData();
+            //解除注册
+            RxSubscriptions.remove(subscribe);
+        }
+    });
+RxSubscriptions.add(subscribe);
+```
+
+### 3.3、base规范
+**library-base** 有两个主要作用：一是依赖通用基础jar或第三方框架，二是存放一些公共的静态属性和方法。下面列举一些基础通用类的约定规范。
 #### 3.3.1、config
-
+在base的config包下面，统一存放全局的配置文件，比如组件生命周期初始化类：**ModuleLifecycleConfig、ModuleLifecycleReflexs**，网络ROOT_URL，SD卡文件读写目录等。
 #### 3.3.2、contract
-
+RxBus组件通信，需要经过base层，统一规范。那么可以在contract包下面定义RxBus的契约类，写好注释，便于其他组件开发人员使用。
 #### 3.3.3、global
-
+主要存放全局的Key，比如 **IntentKeyGlobal：** 存放组件间页面跳转传参的Key名称； **SPKeyGlobal：** 全局SharedPreferences Key 统一存放在这里。单个组件中内部的key可以另外在单独组件中定义。
 #### 3.3.4、router
+**ARouter** 路由@Route注解中Path可以单独抽取一个或者两个RouterPath类出来，比如定义一个RouterActivityPath：
 
+```java
+public class RouterActivityPath {
+    /**
+     * 主业务组件
+     */
+    public static class Main {
+        private static final String MAIN = "/main";
+        /*主业务界面*/
+        public static final String PAGER_MAIN = MAIN +"/Main";
+    }
+```
+
+Activity的路由路径统一在此类中定义，并使用静态内部类分块定义各个组件中的路径路由。
 ## 4、总结
 
+<img src="./img/img9.png" width="320" hegiht="320" align=center />
