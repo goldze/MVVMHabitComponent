@@ -419,7 +419,7 @@ String value;
 
 更多ARouter用法：**[https://github.com/alibaba/ARouter/blob/master/README_CN.md](https://github.com/alibaba/ARouter/blob/master/README_CN.md)**
 #### 3.2.2、事件总线(RxBus)
-**[MVVMHabit](https://github.com/goldze/MVVMHabit)** 中提供了RxBus，可作为全局事件的通信工具。
+**[MVVMHabit](https://github.com/goldze/MVVMHabit)** 中提供了RxBus，可作为全局事件的通信工具（跨进程失效）。
 
 当组件B页面需要回传数据给组件A时，可以调用：
 
