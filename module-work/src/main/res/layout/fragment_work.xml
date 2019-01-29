@@ -26,7 +26,9 @@
             android:dividerHeight="0dip"
             binding:itemBinding="@{viewModel.itemBinding}"
             binding:items="@{viewModel.observableList}"
-            binding:lineManager="@{LineManagers.both()}"
-            binding:layoutManager="@{LayoutManagers.grid(4)}" />
+            binding:layoutManager="@{LayoutManagers.grid(4)}"
+            binding:lineManager="@{LineManagers.both()}" />
+
+        <View style="@style/ViewLineStyle" />
     </LinearLayout>
 </layout>

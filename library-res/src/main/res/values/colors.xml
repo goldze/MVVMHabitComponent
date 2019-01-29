@@ -9,6 +9,6 @@
     <color name="textColorHint">#999999</color>
     <color name="appColor">#FF2041</color>
     <color name="appBackColor">#F4F3F3</color>
-    <color name="viewLineColor">#F0F0F0</color>
+    <color name="viewLineColor">#E0E0E0</color>
 
 </resources>
