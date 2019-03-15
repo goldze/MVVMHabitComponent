@@ -12,6 +12,7 @@ import com.goldze.home.ui.adapter.ViewPagerBindingAdapter;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
 import me.goldze.mvvmhabit.binding.command.BindingConsumer;
+import me.goldze.mvvmhabit.bus.event.SingleLiveEvent;
 import me.goldze.mvvmhabit.utils.ToastUtils;
 import me.tatarka.bindingcollectionadapter2.BindingViewPagerAdapter;
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
@@ -21,6 +22,7 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding;
  */
 
 public class HomeViewModel extends BaseViewModel {
+    public SingleLiveEvent<String> itemClickEvent = new SingleLiveEvent();
     public HomeViewModel(@NonNull Application application) {
         super(application);
     }

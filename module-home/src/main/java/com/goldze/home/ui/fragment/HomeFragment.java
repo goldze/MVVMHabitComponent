@@ -1,5 +1,7 @@
 package com.goldze.home.ui.fragment;
 
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -14,6 +16,7 @@ import com.goldze.home.databinding.FragmentHomeBinding;
 import com.goldze.home.ui.viewmodel.HomeViewModel;
 
 import me.goldze.mvvmhabit.base.BaseFragment;
+import me.goldze.mvvmhabit.utils.ToastUtils;
 
 /**
  * Created by goldze on 2018/6/21
@@ -35,10 +38,16 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         // 使用 TabLayout 和 ViewPager 相关联
         binding.tabs.setupWithViewPager(binding.viewPager);
         binding.viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(binding.tabs));
+        viewModel.addPage();
     }
 
     @Override
     public void initViewObservable() {
-        viewModel.addPage();
+        viewModel.itemClickEvent.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                ToastUtils.showShort(s);
+            }
+        });
     }
 }
