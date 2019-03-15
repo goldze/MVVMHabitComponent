@@ -22,7 +22,7 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding;
  */
 
 public class HomeViewModel extends BaseViewModel {
-    public SingleLiveEvent<String> itemClickEvent = new SingleLiveEvent();
+    public SingleLiveEvent<String> itemClickEvent = new SingleLiveEvent<>();
     public HomeViewModel(@NonNull Application application) {
         super(application);
     }
