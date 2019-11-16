@@ -1,6 +1,5 @@
 package com.goldze.home.ui.fragment;
 
-import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
